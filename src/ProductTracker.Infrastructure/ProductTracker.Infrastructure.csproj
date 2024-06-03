@@ -17,4 +17,9 @@
     <Folder Include="Db\Model\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="linq2db.PostgreSQL" Version="5.4.1" />
+    <PackageReference Include="Npgsql" Version="8.0.3" />
+  </ItemGroup>
+
 </Project>

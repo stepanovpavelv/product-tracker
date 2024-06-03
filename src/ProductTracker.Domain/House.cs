@@ -1,9 +1,9 @@
 ﻿namespace ProductTracker.Domain;
 
 /// <summary>
-/// Модель справочной сущности `Дом` (`Локация`).
+/// Домен справочной сущности `Дом` (`Локация`).
 /// </summary>
-public sealed class House : BaseEntity
+public sealed class House : BaseDomainEntity
 {
     /// <summary>
     /// Краткое описание.

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Db\Migrations\" />
+    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
 ﻿namespace ProductTracker.Domain;
 
 /// <summary>
-/// Модель справочной сущности `Товар` (`Продукт`).
+/// Домен справочной сущности `Товар`.
 /// </summary>
-public sealed class Goods : BaseEntity
+public sealed class Goods : BaseDomainEntity
 {
     /// <summary>
     /// Наименование товара.

@@ -1,9 +1,9 @@
 ﻿namespace ProductTracker.Domain;
 
 /// <summary>
-/// Модель сущности `Пользователь`.
+/// Домен сущности `Пользователь`.
 /// </summary>
-public sealed class User : BaseEntity
+public sealed class User : BaseDomainEntity
 {
     /// <summary>
     /// Имя

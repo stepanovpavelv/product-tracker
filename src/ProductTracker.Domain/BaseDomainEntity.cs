@@ -1,9 +1,9 @@
 ﻿namespace ProductTracker.Domain;
 
 /// <summary>
-/// Модель базовой сущности
+/// Домен базовой сущности
 /// </summary>
-public abstract class BaseEntity
+public abstract class BaseDomainEntity
 {
     public long Id { get; set; }
 }

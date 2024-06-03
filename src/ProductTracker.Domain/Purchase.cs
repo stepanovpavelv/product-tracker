@@ -1,14 +1,14 @@
 ﻿namespace ProductTracker.Domain;
 
 /// <summary>
-/// Модель сущности `Купленный товар`.
+/// Домен сущности `Совершенная покупка`.
 /// </summary>
-public sealed class Purchase : BaseEntity
+public sealed class Purchase : BaseDomainEntity
 {
     /// <summary>
-    /// Ссылка на товар.
+    /// Ссылка на дом, где хранится продукт.
     /// </summary>
-    public required Goods Product { get; set; }
+    public required House House { get; set; }
 
     /// <summary>
     /// Дата покупки.
@@ -16,7 +16,7 @@ public sealed class Purchase : BaseEntity
     public required DateOnly BoughtDate { get; set; }
 
     /// <summary>
-    /// Срок годности.
+    /// Купленные продукты.
     /// </summary>
-    public required DateOnly ExpireDate { get; set; }
+    public required List<Product> Products { get; set; }
 }

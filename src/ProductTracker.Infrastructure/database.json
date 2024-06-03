@@ -1,0 +1,7 @@
+{
+  "general": {
+    "provider": "PostgreSQL",
+    "output": "./src/ProductTracker.Infrastructure/DB/Model",
+    "overwrite": true
+  }
+}

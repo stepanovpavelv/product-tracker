@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Model\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <None Remove="Model\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Db\Migrations\" />
-    <Folder Include="Model\" />
+    <Folder Include="Db\Model\" />
   </ItemGroup>
 
 </Project>

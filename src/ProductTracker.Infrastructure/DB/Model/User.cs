@@ -36,6 +36,14 @@ namespace DataModel
 		/// Дата рождения
 		/// </summary>
 		[Column("birth_day"                                                                                    )] public DateTime BirthDay  { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// Логин пользователя
+		/// </summary>
+		[Column("login"     , CanBeNull    = false                                                             )] public string   Login     { get; set; } = null!; // character varying(50)
+		/// <summary>
+		/// Пароль пользователя
+		/// </summary>
+		[Column("password"  , CanBeNull    = false                                                             )] public string   Password  { get; set; } = null!; // character varying(300)
 
 		#region Associations
 		/// <summary>

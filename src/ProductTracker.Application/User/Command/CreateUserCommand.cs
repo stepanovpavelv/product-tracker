@@ -5,7 +5,7 @@ using ProductTracker.Application.User.Response;
 
 namespace ProductTracker.Application.User.Command;
 
-public sealed class CreateCustomerCommand : IRequest<Result<CreatedUserResponse>>
+public sealed class CreateUserCommand : IRequest<Result<CreatedUserResponse>>
 {
     [Required]
     [MaxLength(75)]

@@ -16,20 +16,20 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-	public partial class ProductsLabDb : DataConnection
+	public partial class AppDataConnection : DataConnection
 	{
-		public ProductsLabDb()
+		public AppDataConnection()
 		{
 			InitDataContext();
 		}
 
-		public ProductsLabDb(string configuration)
+		public AppDataConnection(string configuration)
 			: base(configuration)
 		{
 			InitDataContext();
 		}
 
-		public ProductsLabDb(DataOptions<ProductsLabDb> options)
+		public AppDataConnection(DataOptions<AppDataConnection> options)
 			: base(options.Options)
 		{
 			InitDataContext();

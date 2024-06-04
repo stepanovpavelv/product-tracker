@@ -3,5 +3,8 @@
     "provider": "PostgreSQL",
     "output": "./src/ProductTracker.Infrastructure/DB/Model",
     "overwrite": true
+  },
+  "dataModel": {
+    "context-name": "AppDataConnection"
   }
 }

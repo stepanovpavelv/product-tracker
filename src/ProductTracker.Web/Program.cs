@@ -1,4 +1,9 @@
+using ProductTracker.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var appConfig = new ApplicationConfig(args);
+builder.Services.AddSingleton(appConfig);
 
 // Add services to the container.
 

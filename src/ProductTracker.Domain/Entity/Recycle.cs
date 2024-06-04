@@ -1,4 +1,4 @@
-﻿namespace ProductTracker.Domain;
+﻿namespace ProductTracker.Domain.Entity;
 
 /// <summary>
 /// Домен сущности `Утилизация`.
@@ -8,7 +8,7 @@ public sealed class Recycle : BaseDomainEntity
     /// <summary>
     /// Купленный товар.
     /// </summary>
-    public required Purchase Purchase { get; set; }
+    public required Product Product { get; set; }
 
     /// <summary>
     /// Срок его утилизации/либо употребления.

@@ -1,4 +1,4 @@
-﻿namespace ProductTracker.Domain;
+﻿namespace ProductTracker.Domain.Entity;
 
 /// <summary>
 /// Домен сущности `Пользователь`.

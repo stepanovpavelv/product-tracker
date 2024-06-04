@@ -5,13 +5,15 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductTracker.Web", "src\ProductTracker.Web\ProductTracker.Web.csproj", "{945BDAC7-BF38-4EE4-863D-00DBB9162569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductTracker.Domain", "src\ProductTracker.Domain\ProductTracker.Domain.csproj", "{D7503C09-65C3-4C2E-85D4-E7949DCE2B98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductTracker.Domain", "src\ProductTracker.Domain\ProductTracker.Domain.csproj", "{D7503C09-65C3-4C2E-85D4-E7949DCE2B98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductTracker.Infrastructure", "src\ProductTracker.Infrastructure\ProductTracker.Infrastructure.csproj", "{ACB7AD75-B915-423B-8E15-4B2ECE6387BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductTracker.Infrastructure", "src\ProductTracker.Infrastructure\ProductTracker.Infrastructure.csproj", "{ACB7AD75-B915-423B-8E15-4B2ECE6387BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductTracker.Application", "src\ProductTracker.Application\ProductTracker.Application.csproj", "{F8842877-3293-4FC5-B644-BB698233C804}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductTracker.Application", "src\ProductTracker.Application\ProductTracker.Application.csproj", "{F8842877-3293-4FC5-B644-BB698233C804}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductTracker.Utils", "src\ProductTracker.Utils\ProductTracker.Utils.csproj", "{C9F09EB7-197E-49C1-B472-97D71DE566AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductTracker.Utils", "src\ProductTracker.Utils\ProductTracker.Utils.csproj", "{C9F09EB7-197E-49C1-B472-97D71DE566AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductTracker.UnitTest", "tests\ProductTracker.UnitTest\ProductTracker.UnitTest.csproj", "{2B1613BF-2B6A-48D9-98CA-8AA00963285D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C9F09EB7-197E-49C1-B472-97D71DE566AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9F09EB7-197E-49C1-B472-97D71DE566AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9F09EB7-197E-49C1-B472-97D71DE566AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B1613BF-2B6A-48D9-98CA-8AA00963285D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B1613BF-2B6A-48D9-98CA-8AA00963285D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B1613BF-2B6A-48D9-98CA-8AA00963285D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B1613BF-2B6A-48D9-98CA-8AA00963285D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

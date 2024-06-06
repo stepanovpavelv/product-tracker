@@ -8,10 +8,10 @@ public sealed class Goods : BaseDomainEntity
     /// <summary>
     /// Наименование товара.
     /// </summary>
-    public required string Name { get; set; }
+    public required string Name { get; init; }
 
     /// <summary>
     /// Краткое описание.
     /// </summary>
-    public required string Description { get; set; }
+    public required string Description { get; init; }
 }

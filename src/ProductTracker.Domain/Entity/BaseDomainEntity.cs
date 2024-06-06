@@ -5,5 +5,5 @@
 /// </summary>
 public abstract class BaseDomainEntity
 {
-    public long Id { get; set; }
+    public long Id { get; init; }
 }

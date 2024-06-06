@@ -8,15 +8,15 @@ public sealed class Purchase : BaseDomainEntity
     /// <summary>
     /// Ссылка на дом, где хранится продукт.
     /// </summary>
-    public required House House { get; set; }
+    public required House House { get; init; }
 
     /// <summary>
     /// Дата покупки.
     /// </summary>
-    public required DateOnly BoughtDate { get; set; }
+    public required DateOnly BoughtDate { get; init; }
 
     /// <summary>
     /// Купленные продукты.
     /// </summary>
-    public required List<Product> Products { get; set; }
+    public required List<Product> Products { get; init; }
 }

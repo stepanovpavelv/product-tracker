@@ -8,10 +8,10 @@ public sealed class Product : BaseDomainEntity
     /// <summary>
     /// Ссылка на товар.
     /// </summary>
-    public required Goods Goods { get; set; }
+    public required Goods Goods { get; init; }
 
     /// <summary>
     /// Срок годности.
     /// </summary>
-    public required DateOnly ExpireDate { get; set; }
+    public required DateOnly ExpireDate { get; init; }
 }

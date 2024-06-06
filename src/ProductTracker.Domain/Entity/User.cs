@@ -8,22 +8,22 @@ public sealed class User : BaseDomainEntity
     /// <summary>
     /// Имя
     /// </summary>
-    public required string FirstName { get; set; }
+    public required string FirstName { get; init; }
 
     /// <summary>
     /// Фамилия
     /// </summary>
-    public required string LastName { get; set; }
+    public required string LastName { get; init; }
 
     /// <summary>
     /// Дата рождения
     /// </summary>
-    public DateOnly Birthday { get; set; }
+    public DateOnly Birthday { get; init; }
 
     /// <summary>
     /// Логин пользователя
     /// </summary>
-    public required string Login { get; set; }
+    public required string Login { get; init; }
 
     /// <summary>
     /// Пароль пользователя
@@ -32,5 +32,5 @@ public sealed class User : BaseDomainEntity
     ///     Он будет заполнен только при создании/изменении доменной сущности.
     ///     В остальных случаях нет надобности заполнять.
     /// </remarks>
-    public string? Password { get; set; }
+    public string? Password { get; init; }
 }

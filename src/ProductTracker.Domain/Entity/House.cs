@@ -8,10 +8,10 @@ public sealed class House : BaseDomainEntity
     /// <summary>
     /// Краткое описание.
     /// </summary>
-    public required string ShortName { get; set; }
+    public required string ShortName { get; init; }
 
     /// <summary>
     /// Подробный адрес.
     /// </summary>
-    public required string FullAddress { get; set; }
+    public required string FullAddress { get; init; }
 }

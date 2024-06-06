@@ -1,10 +1,10 @@
 ﻿using Ardalis.Result;
 using MediatR;
-using ProductTracker.Application.User.Command;
-using ProductTracker.Application.User.Response;
+using ProductTracker.Application.Users.Command;
+using ProductTracker.Application.Users.Response;
 using ProductTracker.Domain.Repository;
 
-namespace ProductTracker.Application.User.Handler;
+namespace ProductTracker.Application.Users.Handler;
 
 public sealed class CreateUserCommandHandler(
     IUserRepository userRepository) : IRequestHandler<CreateUserCommand, Result<CreatedUserResponse>>

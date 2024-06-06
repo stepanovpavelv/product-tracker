@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ardalis.Result;
 using MediatR;
-using ProductTracker.Application.User.Response;
+using ProductTracker.Application.Users.Response;
 
-namespace ProductTracker.Application.User.Command;
+namespace ProductTracker.Application.Users.Command;
 
+/// <summary>
+/// Команда на создание пользователя.
+/// </summary>
 public sealed class CreateUserCommand : IRequest<Result<CreatedUserResponse>>
 {
     [Required]
@@ -20,4 +23,14 @@ public sealed class CreateUserCommand : IRequest<Result<CreatedUserResponse>>
     [Required]
     [DataType(DataType.Date)]
     public required DateOnly DateOfBirth { get; set; }
+
+    [Required]
+    [DataType(DataType.Text)]
+    [MaxLength(50)]
+    public required string Login { get; set; }
+
+    [Required]
+    [DataType(DataType.Text)]
+    [MaxLength(300)]
+    public required string Password { get; set; }
 }

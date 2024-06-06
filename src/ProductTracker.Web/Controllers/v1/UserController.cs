@@ -1,8 +1,8 @@
 ﻿using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProductTracker.Application.User.Command;
-using ProductTracker.Application.User.Response;
+using ProductTracker.Application.Users.Command;
+using ProductTracker.Application.Users.Response;
 using ProductTracker.Web.Model;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;

@@ -19,4 +19,18 @@ public sealed class User : BaseDomainEntity
     /// Дата рождения
     /// </summary>
     public DateOnly Birthday { get; set; }
+
+    /// <summary>
+    /// Логин пользователя
+    /// </summary>
+    public required string Login { get; set; }
+
+    /// <summary>
+    /// Пароль пользователя
+    /// </summary>
+    /// <remarks>
+    ///     Он будет заполнен только при создании/изменении доменной сущности.
+    ///     В остальных случаях нет надобности заполнять.
+    /// </remarks>
+    public string? Password { get; set; }
 }

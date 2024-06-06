@@ -1,6 +1,6 @@
 ﻿using ProductTracker.Application.Common;
 
-namespace ProductTracker.Application.User.Response;
+namespace ProductTracker.Application.Users.Response;
 
 public sealed class CreatedUserResponse(long id) : IResponse
 {

@@ -8,7 +8,7 @@ namespace ProductTracker.Application.Users.Command;
 /// <summary>
 /// Команда на создание пользователя.
 /// </summary>
-public sealed class CreateUserCommand : IRequest<Result<CreatedUserResponse>>
+public sealed class RegisterUserCommand : IRequest<Result<RegisteredUserResponse>>
 {
     [Required]
     [MaxLength(75)]

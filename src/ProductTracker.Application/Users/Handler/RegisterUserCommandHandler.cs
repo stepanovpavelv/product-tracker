@@ -6,12 +6,12 @@ using ProductTracker.Domain.Repository;
 
 namespace ProductTracker.Application.Users.Handler;
 
-public sealed class CreateUserCommandHandler(
-    IUserRepository userRepository) : IRequestHandler<CreateUserCommand, Result<CreatedUserResponse>>
+public sealed class RegisterUserCommandHandler(
+    IUserRepository userRepository) : IRequestHandler<RegisterUserCommand, Result<RegisteredUserResponse>>
 {
     private readonly IUserRepository _userRepository = userRepository;
 
-    public Task<Result<CreatedUserResponse>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public Task<Result<RegisteredUserResponse>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

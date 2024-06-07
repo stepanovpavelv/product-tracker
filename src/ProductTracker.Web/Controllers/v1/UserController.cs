@@ -25,10 +25,10 @@ namespace ProductTracker.Web.Controllers.v1
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(ApiResponse<CreatedUserResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<RegisteredUserResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create([FromBody][Required] CreateUserCommand command) =>
+        public async Task<IActionResult> Create([FromBody][Required] RegisterUserCommand command) =>
             (await _mediator.Send(command)).ToActionResult();
     }
 }

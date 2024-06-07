@@ -51,6 +51,12 @@ namespace DataModel
 		/// </summary>
 		[Association(ThisKey = nameof(Id), OtherKey = nameof(HouseXrefUser.UserId))]
 		public IEnumerable<HouseXrefUser> HouseXrefUsers { get; set; } = null!;
+
+		/// <summary>
+		/// user_refresh_id_fkey backreference
+		/// </summary>
+		[Association(ThisKey = nameof(Id), OtherKey = nameof(UserXrefRefreshToken.UserId))]
+		public IEnumerable<UserXrefRefreshToken> UserXrefRefreshTokens { get; set; } = null!;
 		#endregion
 	}
 }

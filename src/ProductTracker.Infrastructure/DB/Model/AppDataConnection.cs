@@ -40,32 +40,36 @@ namespace DataModel
 		/// <summary>
 		/// Продукт
 		/// </summary>
-		public ITable<Good>             Goods             => this.GetTable<Good>();
+		public ITable<Good>                 Goods                 => this.GetTable<Good>();
 		/// <summary>
 		/// Дом (локация)
 		/// </summary>
-		public ITable<House>            Houses            => this.GetTable<House>();
+		public ITable<House>                Houses                => this.GetTable<House>();
 		/// <summary>
 		/// Жильцы в доме (в локации)
 		/// </summary>
-		public ITable<HouseXrefUser>    HouseXrefUsers    => this.GetTable<HouseXrefUser>();
+		public ITable<HouseXrefUser>        HouseXrefUsers        => this.GetTable<HouseXrefUser>();
 		/// <summary>
 		/// Информация о покупке в магазине
 		/// </summary>
-		public ITable<Purchase>         Purchases         => this.GetTable<Purchase>();
+		public ITable<Purchase>             Purchases             => this.GetTable<Purchase>();
 		/// <summary>
 		/// Детализация покупки
 		/// </summary>
-		public ITable<PurchaseXrefGood> PurchaseXrefGoods => this.GetTable<PurchaseXrefGood>();
+		public ITable<PurchaseXrefGood>     PurchaseXrefGoods     => this.GetTable<PurchaseXrefGood>();
 		/// <summary>
 		/// Утилизация
 		/// </summary>
-		public ITable<Recycle>          Recycles          => this.GetTable<Recycle>();
-		public ITable<SchemaMigration>  SchemaMigrations  => this.GetTable<SchemaMigration>();
+		public ITable<Recycle>              Recycles              => this.GetTable<Recycle>();
+		public ITable<SchemaMigration>      SchemaMigrations      => this.GetTable<SchemaMigration>();
 		/// <summary>
 		/// Пользователь
 		/// </summary>
-		public ITable<User>             Users             => this.GetTable<User>();
+		public ITable<User>                 Users                 => this.GetTable<User>();
+		/// <summary>
+		/// Хранилище refresh-токенов пользователей
+		/// </summary>
+		public ITable<UserXrefRefreshToken> UserXrefRefreshTokens => this.GetTable<UserXrefRefreshToken>();
 	}
 
 	public static partial class ExtensionMethods
@@ -147,6 +151,16 @@ namespace DataModel
 		}
 
 		public static Task<User?> FindAsync(this ITable<User> table, long id, CancellationToken cancellationToken = default)
+		{
+			return table.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+		}
+
+		public static UserXrefRefreshToken? Find(this ITable<UserXrefRefreshToken> table, long id)
+		{
+			return table.FirstOrDefault(e => e.Id == id);
+		}
+
+		public static Task<UserXrefRefreshToken?> FindAsync(this ITable<UserXrefRefreshToken> table, long id, CancellationToken cancellationToken = default)
 		{
 			return table.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 		}

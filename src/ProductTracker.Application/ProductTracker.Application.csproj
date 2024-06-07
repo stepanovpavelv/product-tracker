@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProductTracker.Domain\ProductTracker.Domain.csproj" />
+    <ProjectReference Include="..\ProductTracker.Utils\ProductTracker.Utils.csproj" />
   </ItemGroup>
 
 </Project>

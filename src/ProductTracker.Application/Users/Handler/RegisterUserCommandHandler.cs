@@ -13,6 +13,9 @@ public sealed class RegisterUserCommandHandler(
 
     public Task<Result<RegisteredUserResponse>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(request, nameof(request));
+
+        //var hashedPassword = HashingUtils.GetPasswordHash(request.Password);
         throw new NotImplementedException();
     }
 }

@@ -1,11 +1,14 @@
 ﻿using ProductTracker.Domain.Entity;
 using ProductTracker.Domain.Repository;
+using ProductTracker.Infrastructure.Db;
 
 namespace ProductTracker.Infrastructure.Repository;
 
 /// <inheritdoc cref="IGoodsRepository" />
-internal sealed class GoodsRepository : BaseRepository, IGoodsRepository
+internal sealed class GoodsRepository(DatabaseQueryWrapper queryWrapper) : IGoodsRepository
 {
+    private readonly DatabaseQueryWrapper _queryWrapper = queryWrapper;
+
     public Task<long> CreateAsync(Goods item)
     {
         throw new NotImplementedException();

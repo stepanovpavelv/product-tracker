@@ -15,7 +15,7 @@ public static class ServiceCollectionExtension
             .AddOptionsWithValidation<JwtOption>();
 
     /// <summary>
-    /// Валировать и зарегистрировать экземпляр фрагмента конфигурации приложения.
+    /// Валидировать и зарегистрировать экземпляр фрагмента конфигурации приложения.
     /// </summary>
     /// <typeparam name="TOptions">Тип фрагмента конфигурации.</typeparam>
     /// <param name="services">Перечень регистраций.</param>

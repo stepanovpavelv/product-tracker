@@ -1,11 +1,12 @@
-﻿using Asp.Versioning;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Net.Mime;
+using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ProductTracker.Application.Users.Command;
 using ProductTracker.Application.Users.Response;
+using ProductTracker.Web.Extensions;
 using ProductTracker.Web.Model;
-using System.ComponentModel.DataAnnotations;
-using System.Net.Mime;
 
 namespace ProductTracker.Web.Controllers.v1
 {

@@ -12,7 +12,7 @@ namespace ProductTracker.Web.Controllers.v1
 {
     [ApiController]
     [ApiVersion( 1.0 )]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class UserController(IMediator mediator) : ControllerBase
     {
         private readonly IMediator _mediator = mediator;

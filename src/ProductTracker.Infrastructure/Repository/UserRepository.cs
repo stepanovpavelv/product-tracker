@@ -1,6 +1,8 @@
-﻿using ProductTracker.Domain.Entity;
+﻿using LinqToDB;
+using ProductTracker.Domain.Entity;
 using ProductTracker.Domain.Repository;
 using ProductTracker.Infrastructure.Db;
+using UserModel = DataModel.User;
 
 namespace ProductTracker.Infrastructure.Repository;
 
@@ -11,7 +13,13 @@ internal sealed class UserRepository(DatabaseQueryWrapper queryWrapper) : IUserR
 
     public Task<long> CreateAsync(User item)
     {
-        throw new NotImplementedException();
+        return _queryWrapper.ExecuteAsync(async db =>
+        {
+            return (long)await db.Users.InsertAsync(() => new UserModel
+            {
+
+            });
+        });
     }
 
     public Task<User> FindByIdAsync(long id)

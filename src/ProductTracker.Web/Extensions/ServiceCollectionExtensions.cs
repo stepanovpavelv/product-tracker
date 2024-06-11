@@ -7,9 +7,9 @@ namespace ProductTracker.Web.Extensions;
 [ExcludeFromCodeCoverage]
 internal static class ServicesCollectionExtensions
 {
-    public static void AddSwagger(this IServiceCollection services)
+    public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
-        services.AddSwaggerGen(swaggerOptions =>
+        return services.AddSwaggerGen(swaggerOptions =>
         {
             swaggerOptions.SwaggerDoc("v1", new OpenApiInfo
             {

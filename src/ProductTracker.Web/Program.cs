@@ -1,5 +1,6 @@
 using System.IO.Compression;
 using System.Text.Json.Serialization;
+using Asp.Versioning;
 using FluentValidation;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -25,18 +26,19 @@ builder.Services
         compressionOptions.Providers.Add<GzipCompressionProvider>();
     })
     .AddEndpointsApiExplorer()
-    //.AddApiVersioning(versioningOptions =>
-    //{
-    //    versioningOptions.DefaultApiVersion = ApiVersion.Default;
-    //    versioningOptions.ReportApiVersions = true;
-    //    versioningOptions.AssumeDefaultVersionWhenUnspecified = true;
-    //})
-    //.AddVersionedApiExplorer(explorerOptions =>
-    //{
-    //    explorerOptions.GroupNameFormat = "'v'VVV";
-    //    explorerOptions.SubstituteApiVersionInUrl = true;
-    //})
-    .AddSwagger();
+    .AddSwagger()
+    .AddApiVersioning(versioningOptions =>
+    {
+        versioningOptions.DefaultApiVersion = ApiVersion.Default;
+        versioningOptions.ReportApiVersions = true;
+        versioningOptions.AssumeDefaultVersionWhenUnspecified = true;
+    })
+    .AddApiExplorer(explorerOptions =>
+    {
+        explorerOptions.GroupNameFormat = "'v'VVV";
+        explorerOptions.SubstituteApiVersionInUrl = true;
+    })
+    ;
 
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(behaviorOptions =>

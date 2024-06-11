@@ -1,11 +1,14 @@
 ﻿using ProductTracker.Domain.Entity;
 using ProductTracker.Domain.Repository;
+using ProductTracker.Infrastructure.Db;
 
 namespace ProductTracker.Infrastructure.Repository;
 
 /// <inheritdoc cref="IRecycleRepository" />
-internal sealed class RecycleRepository : IRecycleRepository
+internal sealed class RecycleRepository(DatabaseQueryWrapper queryWrapper) : IRecycleRepository
 {
+    private readonly DatabaseQueryWrapper _queryWrapper = queryWrapper;
+
     public Task<long> CreateAsync(Recycle item)
     {
         throw new NotImplementedException();

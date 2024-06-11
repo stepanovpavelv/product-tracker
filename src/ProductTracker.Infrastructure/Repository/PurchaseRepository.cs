@@ -1,11 +1,14 @@
 ﻿using ProductTracker.Domain.Entity;
 using ProductTracker.Domain.Repository;
+using ProductTracker.Infrastructure.Db;
 
 namespace ProductTracker.Infrastructure.Repository;
 
 /// <inheritdoc cref="IPurchaseRepository" />
-internal sealed class PurchaseRepository : IPurchaseRepository
+internal sealed class PurchaseRepository(DatabaseQueryWrapper queryWrapper) : IPurchaseRepository
 {
+    private readonly DatabaseQueryWrapper _queryWrapper = queryWrapper;
+
     public Task<long> CreateAsync(Purchase item)
     {
         throw new NotImplementedException();

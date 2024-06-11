@@ -1,11 +1,14 @@
 using System.IO.Compression;
+using System.Text.Json.Serialization;
 using FluentValidation;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
+using ProductTracker.Application.Extension;
 using ProductTracker.Domain.Extenstion;
 using ProductTracker.Infrastructure;
+using ProductTracker.Infrastructure.Extension;
 using ProductTracker.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,24 +44,23 @@ builder.Services.AddControllers()
         behaviorOptions.SuppressMapClientErrors = true;
         behaviorOptions.SuppressModelStateInvalidFilter = true;
     })
-    .AddJsonOptions(_ => { });
+    .AddJsonOptions(options => 
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 // Adding the application services in ASP.NET Core DI.
-//builder.Services
-    //.ConfigureAppSettings()
-    //.AddCorrelationGenerator()
-    //.AddInfrastructure()
-    //.AddCommandHandlers()
+builder.Services
+    .ConfigureAppSettings()
+    .AddCorrelationGenerator()
+    .AddInfrastructure()
+    .AddCommandHandlers();
     //.AddQueryHandlers()
     //.AddWriteDbContext()
     //.AddWriteOnlyRepositories()
     //.AddReadDbContext()
     //.AddReadOnlyRepositories()
-    //.AddCacheService(builder.Configuration)
     //.AddHealthChecks(builder.Configuration);
-
-var appConfig = new ApplicationConfig(args);
-builder.Services.AddSingleton(appConfig);
 
 // Validating the services added in the ASP.NET Core DI.
 builder.Host.UseDefaultServiceProvider((context, serviceProviderOptions) =>

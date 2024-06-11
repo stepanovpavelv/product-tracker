@@ -4,7 +4,7 @@ using ProductTracker.Domain.Repository;
 namespace ProductTracker.Infrastructure.Repository;
 
 /// <inheritdoc cref="IGoodsRepository" />
-internal sealed class GoodsRepository : IGoodsRepository
+internal sealed class GoodsRepository : BaseRepository, IGoodsRepository
 {
     public Task<long> CreateAsync(Goods item)
     {

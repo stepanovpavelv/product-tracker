@@ -9,8 +9,7 @@ namespace ProductTracker.Domain.Repository;
 public interface IJwtManagerRepository
 {
     TokenSession GenerateToken(string userName);
-
-    TokenSession GenerateRefreshToken(string userName);
+    //TokenSession GenerateRefreshToken(string userName);
 
     ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
 }

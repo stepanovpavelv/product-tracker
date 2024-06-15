@@ -15,4 +15,7 @@ public sealed class JwtOption : IApplicationOption
 
     [Required]
     public string Audience { get; private init; } = null!;
+
+    [Required]
+    public int ExpiresInMinutes { get; private init; }
 }

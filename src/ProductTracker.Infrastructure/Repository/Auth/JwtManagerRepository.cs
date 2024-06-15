@@ -30,7 +30,7 @@ internal sealed class JwtManagerRepository(
                 new Claim(ClaimTypes.Name, userLogin)
             ]),
             Expires = DateTime.Now.AddMinutes(_config.ExpiresInMinutes),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.Aes128CbcHmacSha256)
         };
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -50,11 +50,12 @@ internal sealed class JwtManagerRepository(
         
         await _queryWrapper.ExecuteAsync(async db =>
         {
-            await db.UserXrefRefreshTokens.Where(x => x.UserId == userId)
-                .Set(x=> x.RefreshToken, newRefreshToken)
+            await db.UserXrefRefreshTokens
+                .Where(x => x.UserId == userId)
+                .Set(x => x.RefreshToken, newRefreshToken)
                 .UpdateAsync();
 
-            return true;
+            return Task.CompletedTask;
         });
 
         return newRefreshToken;

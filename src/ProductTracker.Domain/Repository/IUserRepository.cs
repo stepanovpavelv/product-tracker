@@ -6,4 +6,6 @@ namespace ProductTracker.Domain.Repository;
 /// Поведение репозитория для взаимодействия с сущностью `<see cref="User">`.
 /// </summary>
 public interface IUserRepository : IAsyncGenericRepository<User, long>
-{ }
+{
+    Task<bool> IsUserExistsByLogin(string login, CancellationToken cancellationToken);
+}

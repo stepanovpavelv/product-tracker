@@ -12,9 +12,5 @@ public sealed class UpdateUserRefreshTokenCommand : IRequest<Result<AuthTokenUse
 {
     [Required]
     [DataType(DataType.Text)]
-    public required string AccessToken { get; set; }
-
-    [Required]
-    [DataType(DataType.Text)]
     public required string RefreshToken { get; set; }
 }

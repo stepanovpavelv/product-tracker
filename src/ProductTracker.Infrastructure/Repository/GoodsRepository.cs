@@ -9,32 +9,32 @@ internal sealed class GoodsRepository(DatabaseQueryWrapper queryWrapper) : IGood
 {
     private readonly DatabaseQueryWrapper _queryWrapper = queryWrapper;
 
-    public Task<long> CreateAsync(Goods item)
+    public Task<long> CreateAsync(Goods item, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Goods> FindByIdAsync(long id)
+    public Task<Goods> FindByIdAsync(long id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<Goods>> GetAsync()
+    public Task<IEnumerable<Goods>> GetAsync(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<Goods>> GetAsync(Func<Goods, bool> predicate)
+    public Task<IEnumerable<Goods>> GetAsync(Func<Goods, bool> predicate, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public Task<long> RemoveAsync(Goods item)
+    public Task<long> RemoveAsync(Goods item, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public Task<long> UpdateAsync(Goods item)
+    public Task<long> UpdateAsync(Goods item, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

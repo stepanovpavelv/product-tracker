@@ -1,15 +1,11 @@
-﻿using ProductTracker.Domain.Entity;
-using System.Security.Claims;
-
-namespace ProductTracker.Domain.Repository;
+﻿namespace ProductTracker.Domain.Repository;
 
 /// <summary>
-/// Поведение репозитория для взаимодействия с сущностью <see cref="TokenSession"/>
+/// Поведение репозитория для взаимодействия с токенами аутентификации.
 /// </summary>
 public interface IJwtManagerRepository
 {
-    TokenSession GenerateToken(string userName);
-    //TokenSession GenerateRefreshToken(string userName);
+    string GenerateAccessToken(string userLogin);
 
-    ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
+    Task<string> GenerateRefreshToken(string oldRefreshToken);
 }

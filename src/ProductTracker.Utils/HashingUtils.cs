@@ -7,9 +7,9 @@ public static class HashingUtils
 {
     public static string GetPasswordHash(string key, string? password)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(password, nameof(password));
+        ArgumentException.ThrowIfNullOrEmpty(password, nameof(password));
 
-        byte[] salt = Encoding.UTF8.GetBytes(key);
+        var salt = Encoding.UTF8.GetBytes(key);
 
         return Convert.ToBase64String(KeyDerivation.Pbkdf2(
             password: password!,

@@ -3,7 +3,7 @@
 namespace ProductTracker.Application.Users.Response;
 
 /// <summary>
-/// Ответ системы на регистрацию/аутетификацию пользователя.
+/// Ответ системы на регистрацию/аутентификацию пользователя.
 /// </summary>
 public sealed class AuthTokenUserResponse : IResponse
 {

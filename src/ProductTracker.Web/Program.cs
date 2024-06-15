@@ -37,8 +37,7 @@ builder.Services
     {
         explorerOptions.GroupNameFormat = "'v'VVV";
         explorerOptions.SubstituteApiVersionInUrl = true;
-    })
-    ;
+    });
 
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(behaviorOptions =>

@@ -1,23 +1,18 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Authentication;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using LinqToDB;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ProductTracker.Domain.AppSetting;
 using ProductTracker.Domain.Repository;
-using ProductTracker.Infrastructure.Db;
 
 namespace ProductTracker.Infrastructure.Repository.Auth;
 
 internal sealed class JwtManagerRepository(
-    IOptions<JwtOption> options,
-    DatabaseQueryWrapper queryWrapper) : IJwtManagerRepository
+    IOptions<JwtOption> options) : IJwtManagerRepository
 {
     private readonly JwtOption _config = options.Value;
-    private readonly DatabaseQueryWrapper _queryWrapper = queryWrapper;
 
     public string GenerateAccessToken(string userLogin)
     {
@@ -37,35 +32,35 @@ internal sealed class JwtManagerRepository(
         return tokenHandler.WriteToken(token);
     }
 
-    public async Task<string> GenerateRefreshToken(string oldRefreshToken)
-    {
-        var userId = await _queryWrapper.ExecuteAsync(async db =>
-        {
-            var oldTokenRecord =
-                await db.UserXrefRefreshTokens.FirstOrDefaultAsync(x => x.RefreshToken == oldRefreshToken);
-            return oldTokenRecord?.UserId ?? throw new AuthenticationException($"No such refresh token: {oldRefreshToken}");
-        });
-
-        var newRefreshToken = CreateRefreshToken();
-        
-        await _queryWrapper.ExecuteAsync(async db =>
-        {
-            await db.UserXrefRefreshTokens
-                .Where(x => x.UserId == userId)
-                .Set(x => x.RefreshToken, newRefreshToken)
-                .UpdateAsync();
-
-            return Task.CompletedTask;
-        });
-
-        return newRefreshToken;
-    }
-
-    private static string CreateRefreshToken()
+    public string GenerateRefreshToken()
     {
         var randomNumber = new byte[32];
         using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(randomNumber);
         return Convert.ToBase64String(randomNumber);
-    } 
+    }
+
+    //public async Task<string> GenerateRefreshToken(string oldRefreshToken)
+    //{
+    //    var userId = await _queryWrapper.ExecuteAsync(async db =>
+    //    {
+    //        var oldTokenRecord =
+    //            await db.UserXrefRefreshTokens.FirstOrDefaultAsync(x => x.RefreshToken == oldRefreshToken);
+    //        return oldTokenRecord?.UserId ?? throw new AuthenticationException($"No such refresh token: {oldRefreshToken}");
+    //    });
+
+    //    var newRefreshToken = CreateRefreshToken();
+        
+    //    await _queryWrapper.ExecuteAsync(async db =>
+    //    {
+    //        await db.UserXrefRefreshTokens
+    //            .Where(x => x.UserId == userId)
+    //            .Set(x => x.RefreshToken, newRefreshToken)
+    //            .UpdateAsync();
+
+    //        return Task.CompletedTask;
+    //    });
+
+    //    return newRefreshToken;
+    //}
 }

@@ -21,7 +21,7 @@ public sealed class RegisterUserCommandHandler(
     {
         ArgumentNullException.ThrowIfNull(request, nameof(request));
 
-        var isExist = await _userRepository.IsUserExistsByLogin(request.Login, cancellationToken);
+        var isExist = await _userRepository.IsExistsByLogin(request.Login, cancellationToken);
         if (isExist)
         {
             return Result<RegisteredUserResponse>.Error($"Пользователь с таким логином уже существует: {request.Login}");

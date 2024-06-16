@@ -7,5 +7,5 @@ public interface IJwtManagerRepository
 {
     string GenerateAccessToken(string userLogin);
 
-    Task<string> GenerateRefreshToken(string oldRefreshToken);
+    string GenerateRefreshToken();
 }

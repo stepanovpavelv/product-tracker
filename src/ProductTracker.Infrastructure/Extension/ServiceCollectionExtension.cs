@@ -2,6 +2,7 @@
 using ProductTracker.Domain.Repository;
 using ProductTracker.Infrastructure.Db;
 using ProductTracker.Infrastructure.Repository;
+using ProductTracker.Infrastructure.Repository.Auth;
 
 namespace ProductTracker.Infrastructure.Extension;
 
@@ -14,5 +15,7 @@ public static class ServiceCollectionExtension
             .AddScoped<IHouseRepository, HouseRepository>()
             .AddScoped<IGoodsRepository, GoodsRepository>()
             .AddScoped<IPurchaseRepository, PurchaseRepository>()
-            .AddScoped<IRecycleRepository, RecycleRepository>();
+            .AddScoped<IRecycleRepository, RecycleRepository>()
+            .AddScoped<IJwtManagerRepository, JwtManagerRepository>()
+            .AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 }

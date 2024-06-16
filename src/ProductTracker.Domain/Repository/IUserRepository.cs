@@ -7,5 +7,7 @@ namespace ProductTracker.Domain.Repository;
 /// </summary>
 public interface IUserRepository : IAsyncGenericRepository<User, long>
 {
-    Task<bool> IsUserExistsByLogin(string login, CancellationToken cancellationToken);
+    Task<bool> IsExistsByLogin(string login, CancellationToken cancellationToken);
+
+    Task<User?> GetByLogin(string login, CancellationToken cancellationToken);
 }

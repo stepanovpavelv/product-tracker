@@ -1,7 +1,7 @@
-﻿using Ardalis.Result;
+﻿using System.ComponentModel.DataAnnotations;
+using Ardalis.Result;
 using MediatR;
 using ProductTracker.Application.Users.Response;
-using System.ComponentModel.DataAnnotations;
 
 namespace ProductTracker.Application.Users.Command;
 
@@ -10,11 +10,17 @@ namespace ProductTracker.Application.Users.Command;
 /// </summary>
 public sealed class LoginUserCommand : IRequest<Result<AuthTokenUserResponse>>
 {
+    /// <summary>
+    /// Логин пользователя.
+    /// </summary>
     [Required]
     [DataType(DataType.Text)]
     [MaxLength(50)]
     public required string Login { get; set; }
 
+    /// <summary>
+    /// Пароль.
+    /// </summary>
     [Required]
     [DataType(DataType.Text)]
     [MaxLength(300)]

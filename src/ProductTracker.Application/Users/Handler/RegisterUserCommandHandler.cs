@@ -10,6 +10,9 @@ using ProductTracker.Utils;
 
 namespace ProductTracker.Application.Users.Handler;
 
+/// <summary>
+/// Регистрация нового пользователя в системе.
+/// </summary>
 public sealed class RegisterUserCommandHandler(
     IOptions<JwtOption> option,
     IUserRepository userRepository) : IRequestHandler<RegisterUserCommand, Result<RegisteredUserResponse>>

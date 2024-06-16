@@ -20,7 +20,7 @@ namespace ProductTracker.Web.Controllers.v1
         /// <summary>
         /// Регистрация нового пользователя.
         /// </summary>
-        /// <response code="200">Возвращает идентификатор нового пользователя.</response>
+        /// <response code="200">Возвращает идентификатор зарегистрированного пользователя.</response>
         /// <response code="400">Возвращает перечень валидационных ошибок при некорректном запросе.</response>
         /// <response code="500">Произошла непредвиденная ошибка сервиса.</response>
         [HttpPost]
@@ -30,6 +30,36 @@ namespace ProductTracker.Web.Controllers.v1
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody][Required] RegisterUserCommand command) =>
+            (await _mediator.Send(command)).ToActionResult();
+
+        /// <summary>
+        /// Аутентификация пользователя.
+        /// </summary>
+        /// <response code="200">Возвращает аутентификационные данные.</response>
+        /// <response code="400">Возвращает перечень валидационных ошибок при некорректном запросе.</response>
+        /// <response code="500">Произошла непредвиденная ошибка сервиса.</response>
+        [HttpPost]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(ApiResponse<AuthTokenUserResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Login([FromBody][Required] LoginUserCommand command) =>
+            (await _mediator.Send(command)).ToActionResult();
+
+        /// <summary>
+        /// Обновление токенов доступа пользователя к системе.
+        /// </summary>
+        /// <response code="200">Возвращает аутентификационные данные.</response>
+        /// <response code="400">Возвращает перечень валидационных ошибок при некорректном запросе.</response>
+        /// <response code="500">Произошла непредвиденная ошибка сервиса.</response>
+        [HttpPost]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(ApiResponse<AuthTokenUserResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateCredentials([FromBody][Required] UpdateUserRefreshTokenCommand command) =>
             (await _mediator.Send(command)).ToActionResult();
     }
 }

@@ -9,6 +9,9 @@ using ProductTracker.Utils;
 
 namespace ProductTracker.Application.Users.Handler;
 
+/// <summary>
+/// Аутентификация пользователя в системе.
+/// </summary>
 public sealed class LoginUserCommandHandler(
     IOptions<JwtOption> option,
     IUserRepository userRepository,

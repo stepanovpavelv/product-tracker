@@ -8,6 +8,9 @@ using ProductTracker.Domain.Repository;
 
 namespace ProductTracker.Application.Users.Handler;
 
+/// <summary>
+/// Обновление идентификационных данных пользователя.
+/// </summary>
 public sealed class UpdateUserRefreshTokenHandler(
     IOptions<JwtOption> option,
     IUserRepository userRepository,

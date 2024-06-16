@@ -10,6 +10,9 @@ namespace ProductTracker.Application.Users.Command;
 /// </summary>
 public sealed class UpdateUserRefreshTokenCommand : IRequest<Result<AuthTokenUserResponse>>
 {
+    /// <summary>
+    /// Токен для обновления идентификационных данных.
+    /// </summary>
     [Required]
     [DataType(DataType.Text)]
     public required string RefreshToken { get; set; }

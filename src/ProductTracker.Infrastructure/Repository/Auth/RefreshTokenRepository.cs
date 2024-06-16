@@ -19,14 +19,21 @@ internal sealed class RefreshTokenRepository(DatabaseQueryWrapper queryWrapper) 
         });
     }
 
-    public Task<bool> SaveUserIdToken(long userId, string refreshToken, CancellationToken cancellationToken)
+    public Task<long> SaveUserIdToken(long userId, string refreshToken, CancellationToken cancellationToken)
     {
         return _queryWrapper.ExecuteAsync(async db =>
         {
-            await db.UserXrefRefreshTokens
-                .InsertAsync()
-            //    .FirstOrDefaultAsync(x => x.RefreshToken == refreshToken, cancellationToken);
-            //return record?.UserId;
+            return (long)await db.UserXrefRefreshTokens
+                .InsertOrUpdateAsync(() => new DataModel.UserXrefRefreshToken
+                {
+                    UserId = userId,
+                    RefreshToken = refreshToken
+                },
+                t => new DataModel.UserXrefRefreshToken
+                {
+                    RefreshToken = refreshToken
+                },
+                cancellationToken);
         });
     }
 }

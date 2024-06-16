@@ -12,17 +12,17 @@ namespace ProductTracker.Application.Users.Handler;
 public sealed class LoginUserCommandHandler(
     IOptions<JwtOption> option,
     IUserRepository userRepository,
-    IJwtManagerRepository jwtManagerRepository) : IRequestHandler<LoginUserCommand, Result<AuthTokenUserResponse>>
+    IJwtManagerRepository jwtManagerRepository,
+    IRefreshTokenRepository refreshTokenRepository) : IRequestHandler<LoginUserCommand, Result<AuthTokenUserResponse>>
 {
     private readonly JwtOption _setting = option.Value;
     private readonly IUserRepository _userRepository = userRepository;
     private readonly IJwtManagerRepository _jwtManagerRepository = jwtManagerRepository;
+    private readonly IRefreshTokenRepository _refreshTokenRepository = refreshTokenRepository;
 
     public async Task<Result<AuthTokenUserResponse>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request, nameof(request));
-
-        var login = request.Login;
 
         var user = await _userRepository.GetByLogin(request.Login, cancellationToken);
         if (user == null)
@@ -36,19 +36,16 @@ public sealed class LoginUserCommandHandler(
         }
 
         var accessToken = _jwtManagerRepository.GenerateAccessToken(user.Login);
-        var refreshToken = _jwtManagerRepository.GenerateRefreshToken(accessToken);
+        var refreshToken = _jwtManagerRepository.GenerateRefreshToken();
 
-        var user = new User
-        {
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Login = request.Login,
-            Birthday = request.DateOfBirth,
-            Password = hashedPassword
+        await _refreshTokenRepository.SaveUserIdToken(user.Id, refreshToken, cancellationToken);
+
+        var result = new AuthTokenUserResponse
+        { 
+            AccessToken = accessToken, 
+            RefreshToken = refreshToken 
         };
 
-        long userId = await _userRepository.CreateAsync(user, cancellationToken);
-
-        return Result<RegisteredUserResponse>.Success(new RegisteredUserResponse(userId));
+        return Result<AuthTokenUserResponse>.Success(result);
     }
 }

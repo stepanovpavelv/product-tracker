@@ -9,5 +9,5 @@ public sealed class AuthTokenUserResponse : IResponse
 {
     public required string AccessToken { get; init; }
 
-    public required string BearerToken { get; init; }
+    public required string RefreshToken { get; init; }
 }

@@ -11,7 +11,7 @@ public interface IRefreshTokenRepository
     /// <param name="userId">Идентификатор пользователя.</param>
     /// <param name="refreshToken">refresh-токен.</param>
     /// <returns>Статус сохранения.</returns>
-    Task<bool> SaveUserIdToken(long userId, string refreshToken, CancellationToken cancellationToken);
+    Task<long> SaveUserIdToken(long userId, string refreshToken, CancellationToken cancellationToken);
 
     /// <summary>
     /// Получить идентификатор пользователя по refresh-токену.

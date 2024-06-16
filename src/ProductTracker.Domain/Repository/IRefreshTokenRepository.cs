@@ -11,12 +11,12 @@ public interface IRefreshTokenRepository
     /// <param name="userId">Идентификатор пользователя.</param>
     /// <param name="refreshToken">refresh-токен.</param>
     /// <returns>Статус сохранения.</returns>
-    Task<bool> SaveUserIdToken(long userId, string refreshToken);
+    Task<bool> SaveUserIdToken(long userId, string refreshToken, CancellationToken cancellationToken);
 
     /// <summary>
     /// Получить идентификатор пользователя по refresh-токену.
     /// </summary>
     /// <param name="refreshToken">refresh-токен.</param>
     /// <returns>Идентификатор пользователя.</returns>
-    Task<long?> GetUserIdByToken(string refreshToken);
+    Task<long?> GetUserIdByToken(string refreshToken, CancellationToken cancellationToken);
 }

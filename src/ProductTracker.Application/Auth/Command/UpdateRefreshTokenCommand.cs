@@ -1,14 +1,14 @@
-﻿using Ardalis.Result;
+﻿using System.ComponentModel.DataAnnotations;
+using Ardalis.Result;
 using MediatR;
-using ProductTracker.Application.Users.Response;
-using System.ComponentModel.DataAnnotations;
+using ProductTracker.Application.Auth.Response;
 
-namespace ProductTracker.Application.Users.Command;
+namespace ProductTracker.Application.Auth.Command;
 
 /// <summary>
 /// Команда на обновление refresh-токена 
 /// </summary>
-public sealed class UpdateUserRefreshTokenCommand : IRequest<Result<AuthTokenUserResponse>>
+public sealed class UpdateRefreshTokenCommand : IRequest<Result<AuthTokenResponse>>
 {
     /// <summary>
     /// Токен для обновления идентификационных данных.

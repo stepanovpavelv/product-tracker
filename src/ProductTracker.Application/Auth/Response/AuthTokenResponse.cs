@@ -1,11 +1,11 @@
 ﻿using ProductTracker.Application.Common;
 
-namespace ProductTracker.Application.Users.Response;
+namespace ProductTracker.Application.Auth.Response;
 
 /// <summary>
 /// Ответ системы на регистрацию/аутентификацию пользователя.
 /// </summary>
-public sealed class AuthTokenUserResponse : IResponse
+public sealed class AuthTokenResponse : IResponse
 {
     /// <summary>
     /// Аутентификационный токен.

@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ardalis.Result;
 using MediatR;
-using ProductTracker.Application.Users.Response;
+using ProductTracker.Application.Auth.Response;
 
-namespace ProductTracker.Application.Users.Command;
+namespace ProductTracker.Application.Auth.Command;
 
 /// <summary>
 /// Команда на аутентификацию пользователя.
 /// </summary>
-public sealed class LoginUserCommand : IRequest<Result<AuthTokenUserResponse>>
+public sealed class LoginCommand : IRequest<Result<AuthTokenResponse>>
 {
     /// <summary>
     /// Логин пользователя.

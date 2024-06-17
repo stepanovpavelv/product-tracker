@@ -14,6 +14,7 @@ namespace ProductTracker.Web.Controllers.v1;
 // https://auth0.com/docs/secure/tokens/refresh-tokens/get-refresh-tokens
 // сделать один метод, внутри метода контроллера проверять grant_type
 // если client_credentials , то access_токен ; если authorization_code , то refresh_токен
+// добавить енум грант_тайп и проверить в сваггере.
 
 [ApiController]
 [ApiVersion( 1.0 )]
@@ -23,7 +24,7 @@ public class AuthController(IMediator mediator) : ControllerBase
     private readonly IMediator _mediator = mediator;
     
     /// <summary>
-    /// Аутентификация пользователя.
+    /// Получение необходимых учетных данных пользователя.
     /// </summary>
     /// <response code="200">Возвращает аутентификационные данные.</response>
     /// <response code="400">Возвращает перечень валидационных ошибок при некорректном запросе.</response>
@@ -34,7 +35,7 @@ public class AuthController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(ApiResponse<AuthTokenResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Login([FromBody][Required] LoginCommand command) =>
+    public async Task<IActionResult> Login([FromQuery][Required] string grantType, [FromBody][Required] LoginCommand command) =>
         (await _mediator.Send(command)).ToActionResult();
 
     /// <summary>

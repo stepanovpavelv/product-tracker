@@ -9,6 +9,7 @@ using ProductTracker.Domain.Repository;
 
 namespace ProductTracker.Infrastructure.Repository.Auth;
 
+/// <inheritdoc cref="IJwtManagerRepository"/>
 internal sealed class JwtManagerRepository(
     IOptions<JwtOption> options) : IJwtManagerRepository
 {
@@ -39,28 +40,4 @@ internal sealed class JwtManagerRepository(
         rng.GetBytes(randomNumber);
         return Convert.ToBase64String(randomNumber);
     }
-
-    //public async Task<string> GenerateRefreshToken(string oldRefreshToken)
-    //{
-    //    var userId = await _queryWrapper.ExecuteAsync(async db =>
-    //    {
-    //        var oldTokenRecord =
-    //            await db.UserXrefRefreshTokens.FirstOrDefaultAsync(x => x.RefreshToken == oldRefreshToken);
-    //        return oldTokenRecord?.UserId ?? throw new AuthenticationException($"No such refresh token: {oldRefreshToken}");
-    //    });
-
-    //    var newRefreshToken = CreateRefreshToken();
-        
-    //    await _queryWrapper.ExecuteAsync(async db =>
-    //    {
-    //        await db.UserXrefRefreshTokens
-    //            .Where(x => x.UserId == userId)
-    //            .Set(x => x.RefreshToken, newRefreshToken)
-    //            .UpdateAsync();
-
-    //        return Task.CompletedTask;
-    //    });
-
-    //    return newRefreshToken;
-    //}
 }

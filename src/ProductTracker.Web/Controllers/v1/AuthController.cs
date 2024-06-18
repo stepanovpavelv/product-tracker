@@ -32,10 +32,10 @@ public class AuthController(IMediator mediator) : ControllerBase
     [HttpPost]
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
-    [ProducesResponseType(typeof(ApiResponse<AuthTokenResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<RefreshTokenResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Login([FromQuery][Required] string grantType, [FromBody][Required] LoginCommand command) =>
+    public async Task<IActionResult> Login([FromQuery(Name = "grant_type")][Required] string grantType, [FromBody][Required] LoginCommand command) =>
         (await _mediator.Send(command)).ToActionResult();
 
     /// <summary>
@@ -47,7 +47,7 @@ public class AuthController(IMediator mediator) : ControllerBase
     [HttpPost]
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
-    [ProducesResponseType(typeof(ApiResponse<AuthTokenResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<RefreshTokenResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> UpdateCredentials([FromBody][Required] UpdateRefreshTokenCommand command) =>

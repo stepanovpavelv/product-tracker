@@ -8,7 +8,7 @@ namespace ProductTracker.Application.Auth.Command;
 /// <summary>
 /// Команда на обновление refresh-токена 
 /// </summary>
-public sealed class UpdateRefreshTokenCommand : IRequest<Result<AuthTokenResponse>>
+public sealed class UpdateRefreshTokenCommand : IRequest<Result<RefreshTokenResponse>>
 {
     /// <summary>
     /// Токен для обновления идентификационных данных.

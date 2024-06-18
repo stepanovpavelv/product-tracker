@@ -8,7 +8,7 @@ namespace ProductTracker.Application.Auth.Command;
 /// <summary>
 /// Команда на аутентификацию пользователя.
 /// </summary>
-public sealed class LoginCommand : IRequest<Result<AuthTokenResponse>>
+public sealed class LoginCommand : IRequest<Result<AccessTokenResponse>>
 {
     /// <summary>
     /// Логин пользователя.

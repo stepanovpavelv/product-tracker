@@ -6,7 +6,7 @@ using ProductTracker.Application.Auth.Response;
 using ProductTracker.Domain.AppSetting;
 using ProductTracker.Domain.Repository;
 
-namespace ProductTracker.Application.Users.Handler;
+namespace ProductTracker.Application.Auth.Handler;
 
 /// <summary>
 /// Обновление идентификационных данных пользователя.
@@ -32,13 +32,14 @@ public sealed class UpdateRefreshTokenHandler(
             return Result<RefreshTokenResponse>.Error($"Данный refresh-токен не зарегистрирован в системе: {request.RefreshToken}");
         }
 
-        var usersByCondition = (await _userRepository.GetAsync(x => x.Id == userId, cancellationToken)).ToList();
-        if (usersByCondition.Count != 1)
+        var usersByCondition = await _userRepository.GetAsync(x => x.Id == userId, cancellationToken);
+        var usersList = usersByCondition.ToList();
+        if (usersList.Count != 1)
         {
             return Result<RefreshTokenResponse>.Error("Зарегистрировано больше 1 пользователя с данным идентификатором");
         }
 
-        var user = usersByCondition.Single();
+        var user = usersList.Single();
 
         var accessToken = _jwtManagerRepository.GenerateAccessToken(user.Login);
         var refreshToken = _jwtManagerRepository.GenerateRefreshToken();

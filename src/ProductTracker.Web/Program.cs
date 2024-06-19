@@ -55,13 +55,8 @@ builder.Services
     .ConfigureAppSettings()
     .AddCorrelationGenerator()
     .AddInfrastructure()
-    .AddCommandHandlers();
-    //.AddQueryHandlers()
-    //.AddWriteDbContext()
-    //.AddWriteOnlyRepositories()
-    //.AddReadDbContext()
-    //.AddReadOnlyRepositories()
-    //.AddHealthChecks(builder.Configuration);
+    .AddCommandHandlers()
+    .AddHealthChecks(builder.Configuration);
 
 // Validating the services added in the ASP.NET Core DI.
 builder.Host.UseDefaultServiceProvider((context, serviceProviderOptions) =>
@@ -71,7 +66,7 @@ builder.Host.UseDefaultServiceProvider((context, serviceProviderOptions) =>
 });
 
 // Using the Kestrel Server (linux).
-builder.WebHost.UseKestrel(kestrelOptions => kestrelOptions.AddServerHeader = false);
+//builder.WebHost.UseKestrel(kestrelOptions => kestrelOptions.AddServerHeader = false);
 
 var app = builder.Build();
 

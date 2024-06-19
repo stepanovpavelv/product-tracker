@@ -40,19 +40,19 @@ internal sealed class UserRepository(DatabaseQueryWrapper queryWrapper) : IUserR
                 LastName = item.LastName,
                 Login = item.Login,
                 Password = item.Password!,
-                BirthDay = Convert.ToDateTime(item.Birthday)
-            });
+                BirthDay = item.Birthday.ToDateTime(TimeOnly.MinValue),
+            }, token: cancellationToken);
         });
     }
 
     public Task<User> FindByIdAsync(long id, CancellationToken cancellationToken)
     {
         return _queryWrapper.ExecuteAsync(async db =>
-           await db.Users
+            await Task.FromResult(db.Users
                 .Where(x => x.Id == id)
+                .AsEnumerable()
                 .Select(_userMapper.MapUserModelToDomain)
-                .AsQueryable()
-                .SingleAsync(cancellationToken)
+                .Single())
         );
     }
 

@@ -1,6 +1,6 @@
 ﻿namespace ProductTracker.Domain.Extenstion;
 
-public static class TExtensions
+public static class TemplateExtensions
 {
     /// <summary>
     /// Проверить, является ли объект дефолтным значением (для ссылочных типов null).

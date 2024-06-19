@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.OpenApi.Models;
+using ProductTracker.Domain.AppSetting;
+using ProductTracker.Domain.Extenstion;
 
 namespace ProductTracker.Web.Extensions;
 
@@ -31,5 +33,22 @@ internal static class ServicesCollectionExtensions
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             swaggerOptions.IncludeXmlComments(xmlPath, true);
         });
+    }
+    
+    public static void AddHealthChecks(this IServiceCollection services, IConfiguration configuration)
+    {
+        var options = configuration.GetOptions<ConnectionOption>();
+        if (options != null) 
+        {
+            services.AddNpgsqlDataSource(options.NpgsqlConnectionString);
+            services
+                .AddHealthChecks()
+                .AddNpgSql();
+        }
+        else
+        {
+            services
+                .AddHealthChecks();
+        }
     }
 }

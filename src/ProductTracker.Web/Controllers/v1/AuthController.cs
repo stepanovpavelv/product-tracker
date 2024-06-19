@@ -33,21 +33,20 @@ public class AuthController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> Login([FromBody][Required] LoginCommand command) =>
         (await _mediator.Send(command)).ToActionResult();
     
-    // TODO: доделать метод
     /// <summary>
-    /// Получение необходимых учетных данных пользователя.
+    /// Получение refresh-токена пользователя.
     /// </summary>
     /// <response code="200">Возвращает аутентификационные данные.</response>
     /// <response code="400">Возвращает перечень валидационных ошибок при некорректном запросе.</response>
     /// <response code="500">Произошла непредвиденная ошибка сервиса.</response>
     [Authorize]
-    [HttpPost("refresh")]
+    [HttpPost("/refresh")]
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
-    [ProducesResponseType(typeof(ApiResponse<AccessTokenResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<RefreshTokenResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> RefreshToken([FromBody][Required] LoginCommand command) => 
+    public async Task<IActionResult> RefreshToken([FromBody] GetRefreshTokenCommand command) => 
         (await _mediator.Send(command)).ToActionResult();
 
     /// <summary>

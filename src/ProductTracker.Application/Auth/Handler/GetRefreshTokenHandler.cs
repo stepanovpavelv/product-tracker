@@ -37,7 +37,7 @@ public sealed class GetRefreshTokenHandler(
         ArgumentNullException.ThrowIfNull(request, nameof(request));
 
         var principalUser = _contextAccessor.HttpContext?.User;
-        if (principalUser == null || principalUser.Identity == null || !principalUser.Identity.IsAuthenticated)
+        if (principalUser?.Identity is not { IsAuthenticated: true })
         {
             return Result<RefreshTokenResponse>.Error(auth_error);
         }

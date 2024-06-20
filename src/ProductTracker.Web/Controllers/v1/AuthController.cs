@@ -13,7 +13,7 @@ namespace ProductTracker.Web.Controllers.v1;
 
 [ApiController]
 [ApiVersion( 1.0 )]
-[Route("api/v{version:apiVersion}/oauth/token")]
+[Route("api/v{version:apiVersion}/oauth/token/")]
 public class AuthController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
@@ -40,7 +40,7 @@ public class AuthController(IMediator mediator) : ControllerBase
     /// <response code="400">Возвращает перечень валидационных ошибок при некорректном запросе.</response>
     /// <response code="500">Произошла непредвиденная ошибка сервиса.</response>
     [Authorize]
-    [HttpPost("/refresh")]
+    [HttpPost("refresh")]
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType(typeof(ApiResponse<RefreshTokenResponse>), StatusCodes.Status200OK)]
@@ -55,7 +55,7 @@ public class AuthController(IMediator mediator) : ControllerBase
     /// <response code="200">Возвращает аутентификационные данные.</response>
     /// <response code="400">Возвращает перечень валидационных ошибок при некорректном запросе.</response>
     /// <response code="500">Произошла непредвиденная ошибка сервиса.</response>
-    [HttpPost("/refresh/revoke")]
+    [HttpPost("refresh/revoke")]
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType(typeof(ApiResponse<RefreshTokenResponse>), StatusCodes.Status200OK)]

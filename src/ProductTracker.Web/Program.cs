@@ -1,21 +1,20 @@
 using System.IO.Compression;
 using System.Text.Json.Serialization;
 using Asp.Versioning;
-using FluentValidation;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using ProductTracker.Application.Extension;
 using ProductTracker.Domain.Extenstion;
-using ProductTracker.Infrastructure;
 using ProductTracker.Infrastructure.Extension;
 using ProductTracker.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .Configure<GzipCompressionProviderOptions>(compressionOptions => compressionOptions.Level = CompressionLevel.Fastest)
+    .Configure<GzipCompressionProviderOptions>(
+        compressionOptions => compressionOptions.Level = CompressionLevel.Fastest)
     .Configure<JsonOptions>(jsonOptions => jsonOptions.JsonSerializerOptions.Configure())
     .Configure<RouteOptions>(routeOptions => routeOptions.LowercaseUrls = true)
     //.AddHttpClient()
@@ -38,6 +37,10 @@ builder.Services
         explorerOptions.GroupNameFormat = "'v'VVV";
         explorerOptions.SubstituteApiVersionInUrl = true;
     });
+
+// authentication & authorization
+builder.Services.AddAuthentication(builder.Configuration);
+builder.Services.AddAuthorization();
 
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(behaviorOptions =>

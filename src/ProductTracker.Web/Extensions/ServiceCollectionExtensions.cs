@@ -79,7 +79,7 @@ internal static class ServicesCollectionExtensions
                     (Encoding.UTF8.GetBytes(jwtOptions.Key)),
                 ValidateIssuer = true,
                 ValidateAudience = true,
-                ValidateLifetime = false,
+                ValidateLifetime = true,
                 ValidateIssuerSigningKey = true
             };
         });

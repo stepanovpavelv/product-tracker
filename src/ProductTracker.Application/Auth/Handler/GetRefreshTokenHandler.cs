@@ -24,10 +24,9 @@ public sealed class GetRefreshTokenHandler(
     IJwtManagerRepository jwtManagerRepository,
     IRefreshTokenRepository refreshTokenRepository) : IRequestHandler<GetRefreshTokenCommand, Result<RefreshTokenResponse>>
 {
-    private const string auth_error = "Пользователь не авторизован в системе";
+    private const string AuthError = "Пользователь не авторизован в системе";
 
     private readonly IHttpContextAccessor _contextAccessor = contextAccessor;
-    private readonly IOptions<JwtOption> _option = option;
     private readonly IUserRepository _userRepository = userRepository;
     private readonly IJwtManagerRepository _jwtManagerRepository = jwtManagerRepository;
     private readonly IRefreshTokenRepository _refreshTokenRepository = refreshTokenRepository;
@@ -39,13 +38,13 @@ public sealed class GetRefreshTokenHandler(
         var principalUser = _contextAccessor.HttpContext?.User;
         if (principalUser?.Identity is not { IsAuthenticated: true })
         {
-            return Result<RefreshTokenResponse>.Error(auth_error);
+            return Result<RefreshTokenResponse>.Error(AuthError);
         }
 
         var userLogin = principalUser.FindFirst(ClaimTypes.Name);
         if (string.IsNullOrEmpty(userLogin?.Value))
         {
-            return Result<RefreshTokenResponse>.Error(auth_error);
+            return Result<RefreshTokenResponse>.Error(AuthError);
         }
 
         var usersByCondition = await _userRepository.GetAsync(x => x.Login == userLogin.Value, cancellationToken);
@@ -58,14 +57,22 @@ public sealed class GetRefreshTokenHandler(
         var user = usersList.Single();
 
         var accessToken = _jwtManagerRepository.GenerateAccessToken(user.Login);
-        var refreshToken = _jwtManagerRepository.GenerateRefreshToken();
+        var newRefreshToken = _jwtManagerRepository.GenerateRefreshToken();
 
-        await _refreshTokenRepository.SaveUserIdToken(user.Id, refreshToken, cancellationToken);
+        var tokenSession = await _refreshTokenRepository.GetTokenByUserId(user.Id, cancellationToken);
+        if (string.IsNullOrEmpty(tokenSession.RefreshToken))
+        {
+            await _refreshTokenRepository.SaveUserIdToken(user.Id, newRefreshToken, cancellationToken);
+        }
+        else
+        {
+            await _refreshTokenRepository.SaveUserIdToken(user.Id, newRefreshToken, tokenSession.RefreshToken, cancellationToken);
+        }
 
         var result = new RefreshTokenResponse
         {
             AccessToken = accessToken,
-            RefreshToken = refreshToken,
+            RefreshToken = newRefreshToken,
             TokenType = "Bearer"
         };
 

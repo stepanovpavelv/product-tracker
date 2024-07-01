@@ -18,7 +18,7 @@ internal sealed class JwtManagerRepository(
     public string GenerateAccessToken(string userLogin)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var tokenKey = Encoding.UTF8.GetBytes(_config.Key);
+        var tokenKey = Encoding.ASCII.GetBytes(_config.Key);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(
@@ -26,7 +26,7 @@ internal sealed class JwtManagerRepository(
                 new Claim(ClaimTypes.Name, userLogin)
             ]),
             Expires = DateTime.Now.AddMinutes(_config.ExpiresInMinutes),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.Aes128CbcHmacSha256)
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
         };
 
         var token = tokenHandler.CreateToken(tokenDescriptor);

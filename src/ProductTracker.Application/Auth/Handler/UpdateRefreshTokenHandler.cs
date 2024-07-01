@@ -1,9 +1,7 @@
 ﻿using Ardalis.Result;
 using MediatR;
-using Microsoft.Extensions.Options;
 using ProductTracker.Application.Auth.Command;
 using ProductTracker.Application.Auth.Response;
-using ProductTracker.Domain.AppSetting;
 using ProductTracker.Domain.Repository;
 
 namespace ProductTracker.Application.Auth.Handler;
@@ -12,12 +10,10 @@ namespace ProductTracker.Application.Auth.Handler;
 /// Обновление идентификационных данных пользователя.
 /// </summary>
 public sealed class UpdateRefreshTokenHandler(
-    IOptions<JwtOption> option,
     IUserRepository userRepository,
     IJwtManagerRepository jwtManagerRepository,
     IRefreshTokenRepository refreshTokenRepository) : IRequestHandler<UpdateRefreshTokenCommand, Result<RefreshTokenResponse>>
 {
-    private readonly IOptions<JwtOption> _option = option;
     private readonly IUserRepository _userRepository = userRepository;
     private readonly IJwtManagerRepository _jwtManagerRepository = jwtManagerRepository;
     private readonly IRefreshTokenRepository _refreshTokenRepository = refreshTokenRepository;
@@ -26,12 +22,13 @@ public sealed class UpdateRefreshTokenHandler(
     {
         ArgumentNullException.ThrowIfNull(request, nameof(request));
 
-        var userId = await _refreshTokenRepository.GetUserIdByToken(request.RefreshToken, cancellationToken);
-        if (userId == null)
+        var tokenSession = await _refreshTokenRepository.GetUserIdByToken(request.RefreshToken, cancellationToken);
+        if (tokenSession.UserId == null)
         {
             return Result<RefreshTokenResponse>.Error($"Данный refresh-токен не зарегистрирован в системе: {request.RefreshToken}");
         }
 
+        var userId = tokenSession.UserId.Value;
         var usersByCondition = await _userRepository.GetAsync(x => x.Id == userId, cancellationToken);
         var usersList = usersByCondition.ToList();
         if (usersList.Count != 1)
@@ -42,14 +39,14 @@ public sealed class UpdateRefreshTokenHandler(
         var user = usersList.Single();
 
         var accessToken = _jwtManagerRepository.GenerateAccessToken(user.Login);
-        var refreshToken = _jwtManagerRepository.GenerateRefreshToken();
+        var newRefreshToken = _jwtManagerRepository.GenerateRefreshToken();
 
-        await _refreshTokenRepository.SaveUserIdToken(user.Id, refreshToken, cancellationToken);
+        await _refreshTokenRepository.SaveUserIdToken(user.Id, newRefreshToken, request.RefreshToken, cancellationToken);
 
         var result = new RefreshTokenResponse
         {
             AccessToken = accessToken,
-            RefreshToken = refreshToken,
+            RefreshToken = newRefreshToken,
             TokenType = "Bearer"
         };
 

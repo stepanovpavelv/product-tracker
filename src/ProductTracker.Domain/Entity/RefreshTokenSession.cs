@@ -3,15 +3,15 @@
 /// <summary>
 /// Домен сущности `Токен` пользователя.
 /// </summary>
-public sealed class TokenSession
+public sealed class RefreshTokenSession
 {
     /// <summary>
-    /// Токен-подтверждение о прошедшей аунтентификации.
+    /// Идентификатор пользователя.
     /// </summary>
-    public required string AccessToken { get; init; }
+    public long? UserId { get; init; }
 
     /// <summary>
     /// Токен для восстановления аутентификации пользователя.
     /// </summary>
-    public required string RefreshToken { get; init; }
+    public string? RefreshToken { get; init; }
 }

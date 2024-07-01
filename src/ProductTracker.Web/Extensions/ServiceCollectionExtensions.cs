@@ -12,6 +12,8 @@ namespace ProductTracker.Web.Extensions;
 [ExcludeFromCodeCoverage]
 internal static class ServicesCollectionExtensions
 {
+    private const string BearerScheme = "Bearer";
+    
     public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
         return services.AddSwaggerGen(swaggerOptions =>
@@ -32,11 +34,11 @@ internal static class ServicesCollectionExtensions
                 }
             });
             
-            swaggerOptions.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            swaggerOptions.AddSecurityDefinition(BearerScheme, new OpenApiSecurityScheme
             {
                 Name = "Authorization",
                 Type = SecuritySchemeType.ApiKey,
-                Scheme = "Bearer",
+                Scheme = "bearer",
                 BearerFormat = "JWT",
                 In = ParameterLocation.Header,
                 Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
@@ -46,7 +48,7 @@ internal static class ServicesCollectionExtensions
                     new OpenApiSecurityScheme {
                         Reference = new OpenApiReference {
                             Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
+                            Id = BearerScheme
                         }
                     },
                     Array.Empty<string>()
@@ -76,11 +78,10 @@ internal static class ServicesCollectionExtensions
                 ValidIssuer = jwtOptions.Issuer,
                 ValidAudience = jwtOptions.Audience,
                 IssuerSigningKey = new SymmetricSecurityKey
-                    (Encoding.UTF8.GetBytes(jwtOptions.Key)),
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = false,
-                ValidateIssuerSigningKey = true
+                    (Encoding.ASCII.GetBytes(jwtOptions.Key)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = false
             };
         });
     }

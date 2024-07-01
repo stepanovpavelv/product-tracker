@@ -21,6 +21,8 @@ internal sealed class JwtManagerRepository(
         var tokenKey = Encoding.ASCII.GetBytes(_config.Key);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
+            Issuer = _config.Issuer,
+            Audience = _config.Audience,
             Subject = new ClaimsIdentity(
             [
                 new Claim(ClaimTypes.Name, userLogin)

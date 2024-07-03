@@ -31,6 +31,4 @@ public class UserController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Create([FromBody][Required] RegisterUserCommand command) =>
         (await _mediator.Send(command)).ToActionResult();
-
-    
 }

@@ -13,5 +13,5 @@ public sealed class Goods : BaseDomainEntity
     /// <summary>
     /// Краткое описание.
     /// </summary>
-    public required string Description { get; init; }
+    public string? Description { get; init; }
 }

@@ -25,7 +25,7 @@ public sealed class UpdateRefreshTokenHandler(
         var tokenSession = await _refreshTokenRepository.GetUserIdByToken(request.RefreshToken, cancellationToken);
         if (tokenSession.UserId == null)
         {
-            return Result<RefreshTokenResponse>.Error($"Данный refresh-токен не зарегистрирован в системе: {request.RefreshToken}");
+            return Result<RefreshTokenResponse>.NotFound($"Данный refresh-токен не зарегистрирован в системе: {request.RefreshToken}");
         }
 
         var userId = tokenSession.UserId.Value;

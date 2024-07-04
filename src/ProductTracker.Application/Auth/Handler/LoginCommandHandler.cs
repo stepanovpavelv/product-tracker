@@ -29,7 +29,7 @@ public sealed class LoginCommandHandler(
 
         var user = await _userRepository.GetByLogin(request.Login, cancellationToken);
         if (user == null) { 
-            return Result<AccessTokenResponse>.Error($"Пользователь с таким логином не зарегистрирован: {request.Login}");
+            return Result<AccessTokenResponse>.NotFound($"Пользователь с таким логином не зарегистрирован: {request.Login}");
         }
 
         var hashedPassword = HashingUtils.GetPasswordHash(_setting.Key, request.Password);

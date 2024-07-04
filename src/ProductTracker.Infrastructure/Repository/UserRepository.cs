@@ -26,7 +26,7 @@ internal sealed class UserRepository(DatabaseQueryWrapper queryWrapper) : IUserR
             var user = await db.Users
                 .FirstOrDefaultAsync(x => x.Login == login, cancellationToken);
 
-            return user != null ? _userMapper.MapUserModelToDomain(user) : null;
+            return user != null ? _userMapper.MapModelToDomain(user) : null;
         });
     }
 
@@ -51,7 +51,7 @@ internal sealed class UserRepository(DatabaseQueryWrapper queryWrapper) : IUserR
             await Task.FromResult(db.Users
                 .Where(x => x.Id == id)
                 .AsEnumerable()
-                .Select(_userMapper.MapUserModelToDomain)
+                .Select(_userMapper.MapModelToDomain)
                 .Single())
         );
     }
@@ -61,7 +61,7 @@ internal sealed class UserRepository(DatabaseQueryWrapper queryWrapper) : IUserR
         return _queryWrapper.ExecuteAsync<IEnumerable<User>>(async db =>
             await Task.FromResult(
                 db.Users
-                   .Select(_userMapper.MapUserModelToDomain)
+                   .Select(_userMapper.MapModelToDomain)
                    .ToList()
         ));
     }
@@ -71,7 +71,7 @@ internal sealed class UserRepository(DatabaseQueryWrapper queryWrapper) : IUserR
         return _queryWrapper.ExecuteAsync<IEnumerable<User>>(async db =>
             await Task.FromResult(
                 db.Users
-                   .Select(_userMapper.MapUserModelToDomain)
+                   .Select(_userMapper.MapModelToDomain)
                    .Where(predicate)
                    .ToList()
         ));

@@ -361,4 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/src/ProductTracker.Web/appsettings.Development.json
+
+# JetBrains Rider
+.idea/
+*.sln.iml
